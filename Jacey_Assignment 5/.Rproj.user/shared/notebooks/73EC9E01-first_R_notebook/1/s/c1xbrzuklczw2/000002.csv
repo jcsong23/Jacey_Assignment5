@@ -1,0 +1,23 @@
+"0","```r
+
+condition_data = exp1 %>% 
+  select(subject, rt, typeoftrial, trialcondition, correct) %>%
+  filter(typeoftrial==\"picture\" &
+           trialcondition %in%
+           c(\"Heavy_Normal\",\"Light_Smashed\",\"Heavy_Smashed\",\"Light_Normal\"))
+
+condition_data = condition_data %>%
+  separate(trialcondition, into = c(\"weight\", \"shape\"), sep = \"_\")
+
+
+means = condition_data %>%
+  group_by(weight, shape) %>%
+  summarise(mean_rt = mean(rt),
+    sd_rt = sd(rt),
+    mean_acc = mean(correct))
+
+means %>%
+  ggplot(aes(x = shape, y = sd_rt, fill = weight)) +
+  geom_col(position = \"dodge\") +
+  labs(x = \"Shape\", y = \"RT\", title = \"Barplot of RT\")
+```"

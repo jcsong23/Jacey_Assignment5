@@ -3,26 +3,26 @@
     "path": "~/Library/CloudStorage/OneDrive-BowdoinCollege/Documents/Bowdoin/Github/Jacey_Assignment5/Jacey_Assignment 5/Jacey_Assignment5.Rmd",
     "project_path": "Jacey_Assignment5.Rmd",
     "type": "r_markdown",
-    "hash": "280977260",
+    "hash": "1794494895",
     "contents": "",
-    "dirty": true,
+    "dirty": false,
     "created": 1666994177108.0,
     "source_on_save": false,
-    "relative_order": 1,
+    "relative_order": 2,
     "properties": {
         "tempName": "Untitled1",
         "chunk_output_type": "inline",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "5,0",
-        "scrollLine": "0"
+        "cursorPosition": "51,21",
+        "scrollLine": "32"
     },
     "folds": "",
-    "lastKnownWriteTime": 1666994200,
+    "lastKnownWriteTime": 1667002590,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1666994206945,
+    "last_content_update": 1667002590437,
     "read_only": false,
     "read_only_alternatives": []
 }

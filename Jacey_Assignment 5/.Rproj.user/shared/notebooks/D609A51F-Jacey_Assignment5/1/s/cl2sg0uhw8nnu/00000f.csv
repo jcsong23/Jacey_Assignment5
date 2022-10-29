@@ -1,0 +1,2 @@
+"0","subject_accuracy_wide = subject_accuracy %>%"
+"0","  pivot_wider(names_from = c(prime_condition), values_from = mean_acc)"

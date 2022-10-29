@@ -1,0 +1,4 @@
+"0","x1_bar = mean(subject_wide$Heavy_Normal)"
+"2","Error in mean(subject_wide$Heavy_Normal) : 
+  object 'subject_wide' not found
+"

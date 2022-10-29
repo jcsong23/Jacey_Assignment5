@@ -1,0 +1,7 @@
+"0","```r
+```r
+prime_information = as4 %>% 
+  select(subject, prime_condition)
+
+```
+```"

@@ -1,0 +1,8 @@
+"0","```r
+exp1 = read_csv(\"exp1.csv\")
+
+nrow(exp1)
+ncol(exp1)
+colnames(exp1)
+hist(exp1$rt)
+```"

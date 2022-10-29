@@ -1,0 +1,9 @@
+"0","```r
+mean_subject = condition_data %>%
+  group_by(subject, shape, weight) %>%
+  summarise(mean_rt = mean(rt))
+
+```"
+"1","`summarise()` has grouped output by 'subject', 'shape'. You can override using the
+`.groups` argument.
+"

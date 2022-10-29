@@ -1,0 +1,20 @@
+"0","```r
+library(ggplot2)
+library(ggthemes)
+condition_data %>%
+  filter(rt<25000) %>%
+  ggplot(aes(x=rt)) +
+  geom_histogram(binwidth = 1000,
+                 fill = \"purple\", 
+                 color = \"black\",
+                 position = \"identity\") +
+  theme_few() + 
+  xlab(\"RT (in milliseconds)\") +
+  ylab(\"Count\") +
+  ggtitle(\"Histogram of RT\")
+
+condition_data %>%
+  group_by(subject, trialcondition) %>%
+  count()
+
+```"

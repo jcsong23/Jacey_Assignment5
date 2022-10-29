@@ -1,0 +1,9 @@
+"0","```r
+```r
+prime_acc = as4 %>%
+  group_by(prime_condition) %>%
+  summarise(prime_acc = mean(accuracy),
+            prime_sd = st(accuracy))
+
+```
+```"

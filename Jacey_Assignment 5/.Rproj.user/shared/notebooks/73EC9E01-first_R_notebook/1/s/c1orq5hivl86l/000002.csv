@@ -1,0 +1,13 @@
+"0","```r
+new_means_long = new_means_long %>%
+  separate(conditon, into = c(\"weight\",\"shape\"))
+
+```"
+"1","Error:
+! object 'conditon' not found
+Backtrace:
+  1. new_means_long %>% ...
+  9. base::.handleSimpleError(...)
+ 10. rlang (local) h(simpleError(msg, call))
+ 11. handlers[[1L]](cnd)
+"

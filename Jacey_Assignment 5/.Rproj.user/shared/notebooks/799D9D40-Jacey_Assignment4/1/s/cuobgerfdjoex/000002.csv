@@ -1,0 +1,5 @@
+"0","```r
+subject_acc = as4 %>%
+  group_by(subject) %>%
+  summarise(mean_acc = mean(accuracy))
+```"

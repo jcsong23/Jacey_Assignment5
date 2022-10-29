@@ -1,0 +1,5 @@
+"0","```r
+exp1 %>%
+  select(dataset, correct, typeoftrial) %>%
+  filter(correct==1 & typeoftrial==\"picture\")
+```"

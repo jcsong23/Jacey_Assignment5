@@ -1,0 +1,1 @@
+{"frames":[{"func":"mean(subject_wide$Heavy_Normal)","file":"","line_number":0,"end_line_number":0,"character_number":0,"end_character_number":0}],"message":"Error in mean(subject_wide$Heavy_Normal) : \n  object 'subject_wide' not found\n"}

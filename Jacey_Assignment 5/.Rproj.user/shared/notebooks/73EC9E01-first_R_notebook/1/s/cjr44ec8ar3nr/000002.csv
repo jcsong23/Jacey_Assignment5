@@ -1,0 +1,29 @@
+"0","```r
+subject_wide = subject_wide %>%
+  mutate(diff2 = Light_Normal - Heavy_Normal)
+
+subject_wide = subject_wide %>% ungroup()
+
+outliers2 = subject_wide %>% identify_outliers(diff2)
+
+new_df = outliers2 %>% pull(subject)
+
+subject_wide_new2 = subject_wide %>% filter(!subject %in% new_df)
+
+hist(subject_wide$diff2)
+
+ggqqplot(subject_wide, \"diff2\")
+
+subject_wide %>% shapiro_test(diff2)
+# have p value that's high enough, so can do t-test
+
+hist(subject_wide_new2$\"diff2\")
+ggqqplot(subject_wide_new2, \"diff2\")
+
+subject_wide_new2 %>% shapiro_test(diff2)
+# have p value that's high enough, so can do t-test
+
+t.test(subject_wide_new2$Light_Normal, subject_wide_new2$Heavy_Normal, 
+       var.equal = TRUE, paired = TRUE)
+  # also no difference because p > 0.05 even after excluding outliers
+```"
