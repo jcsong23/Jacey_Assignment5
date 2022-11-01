@@ -36,7 +36,7 @@ subject_rt = assignment5 %>%
 # long to wide
 ```{r}
 subject_accuracy_wide = subject_accuracy %>%
-  pivot_wider(names_from = c(prime_condition), values_from = mean_acc)
+  pivot_wider(names_from = prime_condition, values_from = mean_acc)
 ```
 # wide to long
 ```{r}
@@ -48,7 +48,7 @@ subject_accuracy_long = subject_accuracy_wide %>%
 ```
 # t-test in R
 ```{r}
-t.test(subject_accuracy_wide$phonological, subject_accuracy_wide$semantic, 
+t.test(subject_accuracy_wide$phonological, subject_accuracy_wide$semantic,
        paired = TRUE)
 
 # I chose to use subject_accuracy_wide
@@ -58,41 +58,29 @@ t.test(subject_accuracy_wide$phonological, subject_accuracy_wide$semantic,
 # From this t-test, we can confidently reject the null because the p-value is smaller than 0.05, even when you consider it as a two-tailed test.
 # This means that phonological and semantic primes resulted significantly different accuracy results.
 ```
-# t-test manual !!! QUESTION
+# t-test manual 
 ```{r}
-x1_bar = mean(subject_accuracy_wide$phonological)
-x2_bar = subject_accuracy_wide %>% pull(semantic) %>% mean()
+subject_accuracy_wide = subject_accuracy_wide %>%
+  mutate(diff = phonological - semantic)
 
-s1 = sd(subject_accuracy_wide$phonological)
-s2 = subject_accuracy_wide %>% pull(semantic) %>% sd()
+x_bar = mean(subject_accuracy_wide$diff)
 
-n1 = nrow(subject_accuracy_wide)
-n2 = subject_accuracy_wide %>% pull(semantic) %>% length()
+sd_diff = sd(subject_accuracy_wide$diff)
+t = x_bar/(sd_diff/sqrt(nrow(subject_accuracy_wide)))
 
-t_numerator = x1_bar - x2_bar
-inside_root1 = s1*s1/n1
-inside_root2 = s2*s2/n1
-t_denominator = sqrt(inside_root1 + inside_root2)
-t = t_numerator/t_denominator
+df = nrow(subject_accuracy_wide)-1
 
-# two tailed
-x = s1*s1/n1
-y = s2*s2/n2
-a = s1*s1*s1*s1/(n1*n1*(n1-1))
-b = s2*s2*s2*s2/(n2*n2*(n2-1))
+p_value = 2*(1-pt(t,df))
 
-deg = (x+y)*(x+y)/(a+b)
-
-p_value = 2*(1-pt(t,deg))
 ```
 # t-test outliers
 ```{r}
 subject_acc_wide = subject_accuracy_wide %>%
-  mutate(diff = phonological - semantic)
+  mutate(diff1 = phonological - semantic)
 
 subject_acc_wide = subject_acc_wide %>% ungroup()
 
-outliers = subject_acc_wide %>% identify_outliers(diff)
+outliers = subject_acc_wide %>% identify_outliers(diff1)
 
 # Found 1 outlier
 
@@ -100,13 +88,13 @@ outlier_subs = outliers %>% pull(subject)
 
 newdf = subject_acc_wide %>% filter(!subject %in% outlier_subs)
 
-hist(subject_acc_wide$diff)
+hist(subject_acc_wide$diff1)
 ```
 # t-test normality
 ```{r}
-ggqqplot(subject_acc_wide, "diff")
+ggqqplot(subject_acc_wide, "diff1")
 
-subject_acc_wide %>% shapiro_test(diff)
+subject_acc_wide %>% shapiro_test(diff1)
 
 # The shapiro test shows us that the different distribution, prior to taking out outliers, is roughly normal. The points roughly fall on a straight line, and it passes through O
 
@@ -133,7 +121,7 @@ mean_rt %>%
 # fastest condition is both, slowest is semantic
 
 subject_rt_wide = subject_rt %>%
-  pivot_wider(names_from = c(prime_condition), values_from = mean_rt)
+  pivot_wider(names_from = prime_condition, values_from = mean_rt)
 
 subject_rt_wide = subject_rt_wide %>%
   select(subject, semantic, both)
@@ -155,8 +143,8 @@ ggqqplot(subject_rt_wide, "diff_rt")
 
 subject_rt_wide %>% shapiro_test(diff_rt)
 
-t.test(subject_rt_wide$semantic, subject_rt_wide$both, 
-       var.equal = TRUE, paired = TRUE)
+t.test(subject_rt_wide$semantic, subject_rt_wide$both,
+       paired = TRUE)
 
 # From this data, we can conclude that there was no significant difference in reaction time between semantic and both prime conditions. The p value is larger than 0.05, so we cannot reject the null hypothesis.
 
